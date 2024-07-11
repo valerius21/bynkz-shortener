@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi.responses import RedirectResponse
+from fastapi.responses import PlainTextResponse
 
 app = FastAPI()
 
@@ -9,9 +9,11 @@ async def root():
     return {"greeting": "Hello there!"}
 
 
+app = FastAPI()
+
+
 @app.get("/webtop")
 async def webtop():
-    redirect_url = ("https://gist.githubusercontent.com/valerius21/40d9055856e02f00acdb809ea3b36b5b/raw/acd2f1bae"
-                    "1a2212"
-                    "668e9a61a0dd10d0e5924e38c/webtop.sh")
-    return RedirectResponse(redirect_url)
+    with open("webtop.sh", "r") as f:
+        text_content = f.read()
+    return PlainTextResponse(text_content)
