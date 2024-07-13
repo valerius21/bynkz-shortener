@@ -16,23 +16,11 @@ async def root():
 app = FastAPI()
 
 
-@app.post("/keys/save")
-async def keys(file: UploadFile = File(...)):
-    contents = await file.read()
-    logging.info(contents.decode())
-
-    with open(os.path.join('files', file.filename), 'wb') as f:
-        f.write(contents)
-
-    return JSONResponse(content={"filename": file.filename})
-
-
-@app.get("/keys/show/{filename}")
-async def keys(filename: str):
-    with open(os.path.join('files', filename), 'rb') as f:
-        contents = f.read()
-
-    return PlainTextResponse(contents.decode())
+@app.post("/key")
+async def key(request: Request):
+    with open("files/ed25519.pub", "r") as f:
+        text_content = f.read()
+    return PlainTextResponse(text_content)
 
 
 @app.get("/webtop")
