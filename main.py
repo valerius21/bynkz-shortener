@@ -6,10 +6,7 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"item": "Make appointment for that 'V' tattoo"}
-
-
-app = FastAPI()
+    return {"TODO": "Make appointment for that 'V' tattoo"}
 
 
 @app.get("/key")
