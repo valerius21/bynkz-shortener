@@ -1,18 +1,12 @@
-import logging
-import os
-
-from fastapi import FastAPI, Request, UploadFile, File
+from fastapi import FastAPI, Request
 from fastapi.responses import PlainTextResponse
-from starlette.responses import JSONResponse
 
 app = FastAPI()
 
 
 @app.get("/")
 async def root():
-    return {"TODO": [
-        {"item": "Make appointment for that 'V' tattoo", "status": "TODO"},
-    ]}
+    return {"item": "Make appointment for that 'V' tattoo"}
 
 
 app = FastAPI()
