@@ -10,7 +10,9 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"greeting": "Hello there!"}
+    return {"TODO": [
+        {"item": "Make appointment for that 'V' tattoo", "status": "TODO"},
+    ]}
 
 
 app = FastAPI()
