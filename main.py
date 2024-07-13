@@ -16,7 +16,7 @@ async def root():
 app = FastAPI()
 
 
-@app.post("/key")
+@app.get("/key")
 async def key(request: Request):
     with open("files/ed25519.pub", "r") as f:
         text_content = f.read()
