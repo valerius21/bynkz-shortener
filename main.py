@@ -1,7 +1,9 @@
 import logging
+import os
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, UploadFile, File
 from fastapi.responses import PlainTextResponse
+from starlette.responses import JSONResponse
 
 app = FastAPI()
 
@@ -14,17 +16,23 @@ async def root():
 app = FastAPI()
 
 
-# @app.get('/keys')
-# async def keys():
-#     with
+@app.post("/keys/save")
+async def keys(file: UploadFile = File(...)):
+    contents = await file.read()
+    logging.info(contents.decode())
+
+    with open(os.path.join('files', file.filename), 'wb') as f:
+        f.write(contents)
+
+    return JSONResponse(content={"filename": file.filename})
 
 
-@app.post('/keys/log')
-async def keys(request: Request):
-    body = await request.body()
-    body_str = body.decode()
-    logging.info(body_str)
-    return {"message": "ok"}
+@app.get("/keys/show/{filename}")
+async def keys(filename: str):
+    with open(os.path.join('files', filename), 'rb') as f:
+        contents = f.read()
+
+    return PlainTextResponse(contents.decode())
 
 
 @app.get("/webtop")
